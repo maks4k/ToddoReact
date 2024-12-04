@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from "./components/App";
-import "./index.css";
+import "./index.css";//импорт стилей(обязяательно в индекс фАЙЛ)
 
 
 // const Element=<h1>переменная со всеми компонентами</h1>

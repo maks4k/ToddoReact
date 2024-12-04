@@ -5,7 +5,7 @@ function AddItem() {
     <input
       type="text"
       className="form-control"
-      placeholder="What needs to be done"
+      placeholder="What needs to be done" 
     /><button className="btn btn-outline-secondary col-3">Add Item</button>
   </form>
   )
