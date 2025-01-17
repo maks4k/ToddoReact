@@ -16,11 +16,6 @@ const List = ({tasks,onImportant,onDone,onDeleted}) => {
 // const items=tasks.map((item)=>(
 // <ListItem item={item} key={item.id}/>//создали props item
 // )
-
- 
-
-  
- 
 const items=tasks.map((item)=>(
   <ListItem item={item} key={item.id} onDeleted={(id)=>onDeleted(id)} onDone={(id)=>onDone(id)} onImportant={(id)=>onImportant(id)}
   />//создали props
