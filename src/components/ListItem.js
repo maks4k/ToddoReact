@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 // const ListItem = ({item}) приняли props из компоненнта LIst что бы он увидел переменную item
-const ListItem = ({ item, onDeleteItem,onDone,onImportant }) => {
+const ListItem = ({ item, onDeleted,onDone,onImportant}) => {
   // let [tasks,setTasks]=useState(initiolData);//деструкториизация:  в initiolData положиться начальыне данные масива tasks,второй параметр функция которая будет изменять масив
 
   return (
@@ -23,7 +23,7 @@ const ListItem = ({ item, onDeleteItem,onDone,onImportant }) => {
 
         </button>
         <button
-          onClick={() => onDeleteItem(item.id)}
+          onClick={() => onDeleted(item.id)}
           type="button"
           className="btn btn-outline-danger btn-sm float-end"
         >
