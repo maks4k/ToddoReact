@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {  } from "react";
 
 // const ListItem = ({item}) приняли props из компоненнта LIst что бы он увидел переменную item
 const ListItem = ({ item, onDeleted,onDone,onImportant}) => {

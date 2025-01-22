@@ -30,6 +30,7 @@ const App = () => {
 
   const [tasks, setTasks] = useState(initiolData); //деструкториизация:  в initiolData положиться начальыне данные масива tasks,второй параметр функция которая будет изменять масив
   const [filter,setFilter]=useState(0);//фильтер отоброжение -перендеринга кнопок и задач  
+  const [searchValue, setSearchValue] = useState("");//стейтовая перменная под search
 
   const importantHandler = (id) => {
     const index = tasks.findIndex((element) => {
@@ -54,7 +55,6 @@ const App = () => {
       return element.id === id;
     });
     let newTasks = [...tasks];
-    console.log(newTasks);
 
     newTasks.splice(index, 1); //метод splice удаляет элементы из масива
     setTasks(newTasks);
@@ -76,9 +76,12 @@ const App = () => {
     newTasks.push(newTask); //запушиваем в распакованый масимв,новый масив и меня ниже стейтовую переменную
     setTasks(newTasks);
   };
+  
+  const onSearch = (value) => {
+    setSearchValue(value);
+  };
   const filterHandler = (type=0) => {
     let newTasks, filterTasks;
-    console.log(type);
     
     switch (type) {
       case 0:
@@ -99,12 +102,15 @@ const App = () => {
         return tasks;
     }
   };
- const filteredTasks=filterHandler(filter)
+
+ const filteredTasks=filterHandler(filter).filter((task) =>
+  task.title.toLowerCase().includes(searchValue.toLowerCase())
+);//усовершенсвенная фильтрация под строку поиска задач
   return (
     <div className="todo-app">
       <Header todo={todo} done={done} />
       <div className="top-panel d-flex">
-      <Search/>
+      <Search onSearch={onSearch}/>
       <Filter onFilter={(type) =>{setFilter(type)}}/>
       </div>
       <List
