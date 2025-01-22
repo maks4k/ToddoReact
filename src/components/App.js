@@ -4,6 +4,7 @@ import Header from "./Header";
 import Search from "./Search";
 import List from "./List";
 import AddItem from "./AddItem";
+import Filter from "./Filter";
 
 const App = () => {
   const initiolData = [
@@ -28,6 +29,7 @@ const App = () => {
   ]; //масив объектов с задачами(позже пройдемся map и передадим item которые и будут в последствие объектами)
 
   const [tasks, setTasks] = useState(initiolData); //деструкториизация:  в initiolData положиться начальыне данные масива tasks,второй параметр функция которая будет изменять масив
+  const [filter,setFilter]=useState(0);//фильтер отоброжение -перендеринга кнопок и задач  
 
   const importantHandler = (id) => {
     const index = tasks.findIndex((element) => {
@@ -74,9 +76,10 @@ const App = () => {
     newTasks.push(newTask); //запушиваем в распакованый масимв,новый масив и меня ниже стейтовую переменную
     setTasks(newTasks);
   };
-  const filterHandler = (type) => {
-    console.log(type);
+  const filterHandler = (type=0) => {
     let newTasks, filterTasks;
+    console.log(type);
+    
     switch (type) {
       case 0:
         return tasks;
@@ -86,7 +89,6 @@ const App = () => {
           return element.done === false;
         });
         return filterTasks;
-
       case 2:
         newTasks = [...tasks];
         filterTasks = newTasks.filter((element) => {
@@ -97,16 +99,19 @@ const App = () => {
         return tasks;
     }
   };
-
+ const filteredTasks=filterHandler(filter)
   return (
     <div className="todo-app">
       <Header todo={todo} done={done} />
-      <Search onFilter={(type) => filterHandler(type)} />
+      <div className="top-panel d-flex">
+      <Search/>
+      <Filter onFilter={(type) =>{setFilter(type)}}/>
+      </div>
       <List
         onDeleted={(id) => deletedItemHandler(id)}
         onDone={(id) => doneHandler(id)}
         onImportant={(id) => importantHandler(id)}
-        tasks={tasks}
+        tasks={filteredTasks}
       />
       <AddItem onAdd={(title) => addItemHandler(title)} />
     </div>
